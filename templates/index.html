@@ -1,61 +1,86 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<style type="text/css">
-		.header{
-		background: linear-gradient(blue, white);
-		background:-webkit-linear-gradient(blue, white);
-		background:-moz-linear-gradient(blue, white);
-		background:-o-linear-gradient(blue, white);
-		position: absolute;
-		left: 0px;
-		top: 0px;
-		width: 100%;
-		height: 100px;
-		text-align: center;
-		text-transform: capitalize;
-	}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+      body {
+        margin: 0;
+      }
 
-	.app h1{
-		margin-top:200px; 
-       color: blue;
-       text-transform:capitalize;
-	}
-	</style>
-	<title> Classification results</title>
-</head>
-<body>
-	<div>
-		<header class="header">
-		<marquee behaviour = "alternate"> 
-			<h1>The Application result </h1> 
-		</marquee>
-		</header>
-	</div>
+      .header {
+        background: linear-gradient(blue, white);
+        background: -webkit-linear-gradient(blue, white);
+        background: -moz-linear-gradient(blue, white);
+        background: -o-linear-gradient(blue, white);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        text-align: center;
+        text-transform: capitalize;
+      }
 
-	<div class="app">
-		<section>
-	<table align="center">	
-		<th>
-	<h1> Your information has been Submitted Please wait </h1>
-	{% if prediction== 1 %}
-	<br><br>
-	<h1>Congratulations your eligble for this Loan</h1>
-	<br><br>
-	{% elif prediction==0 %}
-	<h1 style="color: red">We sad to inform that your request has not been accepted</h1>
-	{% endif %}
-	</th>
-	</table>
-		</section>
-	</div>
+      .app {
+        margin-top: 300px;
+		margin-left: 30px;
+      }
 
-	<div>
-		<footer>
-			
-		</footer>
-	</div>
+      .loading-message {
+        display: block;
+		color: rgb(8, 8, 9);
 
+      }
+	  img{
+		margin-top: -140px;
+		margin-right: 30px;
+	  }
 
-</body>
+      .result-message {
+        display: none;
+        color: rgb(13, 225, 80);
+      }
+    </style>
+    <title>Classification results</title>
+  </head>
+  <body>
+    <div>
+      <header class="header">
+        <marquee behavior="alternate">
+          <h1>The Application result</h1>
+        </marquee>
+      </header>
+    </div>
+
+    <section class="app">
+      <table align="left">
+        <tr>
+          <td>
+            <h1 class="loading-message">
+              Your information is being processed. Please wait...
+            </h1>
+            <h1 class="result-message" id="result-message"></h1>
+          </td>
+        </tr>
+      </table>
+	  <table align="right">
+		<tr>
+		  <td>
+			<img src="https://i.pinimg.com/564x/1f/22/c6/1f22c673918f1eb89c5f4185e9c89718.jpg" alt="3d image">
+		  </td>
+		</tr>
+	  </table>
+    </section>
+
+    <script>
+      // Simulate a delay (e.g., 3 seconds) for demonstration purposes
+      setTimeout(function () {
+        document.querySelector(".loading-message").style.display = "none";
+        document.querySelector(".result-message").style.display = "block";
+        document.getElementById("result-message").innerText =
+          "{{ result_message }}";
+      }, 3000);
+    </script>
+  </body>
 </html>
