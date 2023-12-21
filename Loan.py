@@ -6,6 +6,10 @@ import joblib
 
 app = Flask(__name__)
 
+# Load the trained model
+model = joblib.load('Forest.pkl')
+
+
 @app.route('/')
 def home():
     return render_template('Loan_Prediction.html')
@@ -51,16 +55,16 @@ def prediction():
                                  credit, property_area]])
 
         # Load the model and make prediction
-        model = RandomForestClassifier()
-        joblib.dump(model, 'Forest.pkl')
+        # model = RandomForestClassifier()
+        # joblib.dump(model, 'Forest.pkl')
         prediction = model.predict(input_array)
 
         if prediction == 1:
             result_message = "Congratulations! You are eligible for this loan."
         else:
             result_message = "We regret to inform you that your request has not been accepted."
-
-        return render_template('result.html', prediction=result_message)
+        # print("Result Message:", result_message)  
+        return render_template('index.html', result_message=result_message)
 
 if __name__ == '__main__':
     app.run(debug=True)
